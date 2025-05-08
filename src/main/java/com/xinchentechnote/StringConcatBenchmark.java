@@ -5,7 +5,7 @@ import org.openjdk.jmh.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
 public class StringConcatBenchmark {
 
