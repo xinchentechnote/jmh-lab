@@ -25,6 +25,4 @@ jobs:
 
       # 构建 & 测试
       - name: Build with Maven
-        run: mvn -B clean verify
-
-      # （可选）发布到 Sonatype/Maven Central、上传代码覆盖率报告等
+        run: mvn clean package
