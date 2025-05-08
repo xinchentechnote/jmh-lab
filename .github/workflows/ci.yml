@@ -1,21 +1,19 @@
-name: CI
+name: JMH Benchmarks
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-benchmark:
     runs-on: ubuntu-latest
-
     steps:
-      # 检出代码
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # 设置 Java 环境（可根据需要选择 Java 8/11/17）
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -23,6 +21,30 @@ jobs:
           java-version: '17'
           cache: maven
 
-      # 构建 & 测试
-      - name: Build with Maven
-        run: mvn clean package
+      - name: Build fat JMH jar
+        run: mvn clean package -DskipTests
+
+      - name: Run throughput benchmark
+        run: |
+          java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
+            com.xinchentechnote.SpscBenchmark \
+            -f 3 -wi 5 -i 10 \
+            -t 2 \
+            -bm Throughput \
+            -rff spsc_thrput.json
+      - name: Run latency benchmark
+        run: |
+          java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
+            com.xinchentechnote.SpscBenchmark \
+            -f 3 -wi 5 -i 10 \
+            -t 2 \
+            -bm AverageTime \
+            -rff spsc_lat.json
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmh-results
+          path: |
+            spsc_thrput.json
+            spsc_lat.json
