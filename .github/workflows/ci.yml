@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build-and-benchmark:
@@ -32,6 +30,7 @@ jobs:
             -t 2 \
             -bm Throughput \
             -rff spsc_thrput.json
+
       - name: Run latency benchmark
         run: |
           java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
@@ -42,9 +41,9 @@ jobs:
             -rff spsc_lat.json
 
       - name: Upload benchmark results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: jmh-results
-          path: |
-            spsc_thrput.json
-            spsc_lat.json
+          path:
+            - spsc_thrput.json
+            - spsc_lat.json
