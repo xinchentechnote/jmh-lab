@@ -22,7 +22,7 @@ jobs:
 
       - run: |
           java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
-            com.xinchentechnote.SpscBenchmark \
+            com.xinchentechnote.StringConcatBenchmark \
             -bm Throughput -f 1 -wi 3 -i 5 -t 1 \
             -rff result_thrput.json
 
@@ -42,6 +42,6 @@ jobs:
 
       - run: |
           java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
-            com.xinchentechnote.SpscBenchmark \
+            com.xinchentechnote.StringConcatBenchmark \
             -bm AverageTime -f 1 -wi 3 -i 5 -t 1 \
             -rff result_lat.json

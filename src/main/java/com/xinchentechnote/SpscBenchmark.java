@@ -8,7 +8,7 @@ import org.jctools.queues.SpscArrayQueue;
 import org.openjdk.jmh.annotations.*;
 
 import java.util.concurrent.TimeUnit;
-
+//暂时无法测试，会卡死，无法执行结束
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
