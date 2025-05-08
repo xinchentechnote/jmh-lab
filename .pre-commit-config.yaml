@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: mvn-package
+        name: Run Maven package
+        entry: bash -c 'mvn clean package -DskipTests'
+        language: system
+        types: [java]
+
+      # - id: google-java-format
+      #   name: Format Java files
+      #   entry: mvn com.coveo:fmt-maven-plugin:format
+      #   language: system
+      #   types: [java]
