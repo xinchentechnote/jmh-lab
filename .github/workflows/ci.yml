@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-benchmark:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,20 +22,50 @@ jobs:
       - name: Build fat JMH jar
         run: mvn clean package -DskipTests
 
+      - name: Upload JMH jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmh-jar
+          path: target/jmh-lab-1.0-SNAPSHOT.jar
+
+  throughput:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download JMH jar
+        uses: actions/download-artifact@v3
+        with:
+          name: jmh-jar
+
       - name: Run throughput benchmark
         run: |
-          java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
+          java -jar jmh-lab-1.0-SNAPSHOT.jar \
             com.xinchentechnote.SpscBenchmark \
-            -f 3 -wi 5 -i 10 \
+            -f 1 -wi 3 -i 5 \
             -t 2 \
             -bm Throughput \
             -rff spsc_thrput.json
 
+      - name: Upload throughput result
+        uses: actions/upload-artifact@v3
+        with:
+          name: spsc-throughput
+          path: spsc_thrput.json
+
+  latency:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download JMH jar
+        uses: actions/download-artifact@v3
+        with:
+          name: jmh-jar
+
       - name: Run latency benchmark
         run: |
-          java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
+          java -jar jmh-lab-1.0-SNAPSHOT.jar \
             com.xinchentechnote.SpscBenchmark \
-            -f 3 -wi 5 -i 10 \
+            -f 1 -wi 3 -i 5 \
             -t 2 \
             -bm AverageTime \
             -rff spsc_lat.json
