@@ -22,11 +22,6 @@ jobs:
       - name: Build fat JMH jar
         run: mvn clean package -DskipTests
 
-      - name: Upload JMH jar
-        uses: actions/upload-artifact@v3
-        with:
-          name: jmh-jar
-          path: target/jmh-lab-1.0-SNAPSHOT.jar
 
   throughput:
     runs-on: ubuntu-latest
