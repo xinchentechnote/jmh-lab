@@ -1,24 +1,11 @@
 package com.xinchentechnote;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Group;
-import org.openjdk.jmh.annotations.GroupThreads;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Scope;
-
-import org.jctools.queues.SpscArrayQueue;
-
-import com.lmax.disruptor.AlertException;
-import com.lmax.disruptor.RingBuffer;
-import com.lmax.disruptor.SequenceBarrier;
-import com.lmax.disruptor.TimeoutException;
-import com.lmax.disruptor.EventHandler;
+import com.lmax.disruptor.*;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
-import com.lmax.disruptor.dsl.DaemonThreadFactory;
-import com.lmax.disruptor.BusySpinWaitStrategy;
+import com.lmax.disruptor.util.DaemonThreadFactory;
+import org.jctools.queues.SpscArrayQueue;
+import org.openjdk.jmh.annotations.*;
 
 @State(Scope.Benchmark)
 public class SpscBenchmark {
