@@ -11,8 +11,6 @@ on:
         options:
           - MemeryVisibilityBenchmark
           - StringConcatBenchmark
-  push:
-    branches: [ main ]
 
 jobs:
   throughput:
