@@ -37,7 +37,6 @@ jobs:
   latency:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: throughput
     steps:
       - uses: actions/checkout@v3
 
