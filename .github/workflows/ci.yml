@@ -2,6 +2,15 @@ name: JMH Benchmarks
 
 on:
   workflow_dispatch:
+    inputs:
+      benchmark-class:
+        description: 'Select benchmark class to run'
+        required: true
+        default: 'MemeryVisibilityBenchmark'
+        type: choice
+        options:
+          - MemeryVisibilityBenchmark
+          - StringConcatBenchmark
   push:
     branches: [ main ]
 
@@ -20,15 +29,17 @@ jobs:
 
       - run: mvn clean package -DskipTests
 
-      - run: |
+      - name: Run Throughput Benchmark
+        run: |
           java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
-            com.xinchentechnote.MemeryVisibilityBenchmark \
+            com.xinchentechnote.${{ github.event.inputs.benchmark-class || 'MemeryVisibilityBenchmark' }} \
             -bm Throughput -f 1 -wi 3 -i 5 -t 1 \
             -rff result_thrput.json
 
   latency:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    needs: throughput
     steps:
       - uses: actions/checkout@v3
 
@@ -40,8 +51,9 @@ jobs:
 
       - run: mvn clean package -DskipTests
 
-      - run: |
+      - name: Run Latency Benchmark
+        run: |
           java -jar target/jmh-lab-1.0-SNAPSHOT.jar \
-            com.xinchentechnote.MemeryVisibilityBenchmark \
+            com.xinchentechnote.${{ github.event.inputs.benchmark-class || 'MemeryVisibilityBenchmark' }} \
             -bm AverageTime -f 1 -wi 3 -i 5 -t 1 \
             -rff result_lat.json
