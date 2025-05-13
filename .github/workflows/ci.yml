@@ -9,8 +9,9 @@ on:
         default: 'StringConcatBenchmark'
         type: choice
         options:
-          - MemeryVisibilityBenchmark
           - StringConcatBenchmark
+          - MemeryVisibilityBenchmark
+          - VisibilityLatencyBenchmark
 
 jobs:
   throughput:
