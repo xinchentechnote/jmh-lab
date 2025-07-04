@@ -12,6 +12,7 @@ on:
           - StringConcatBenchmark
           - MemeryVisibilityBenchmark
           - VisibilityLatencyBenchmark
+          - DoubleVsBigDecimalBenchmark
 
 jobs:
   throughput:
