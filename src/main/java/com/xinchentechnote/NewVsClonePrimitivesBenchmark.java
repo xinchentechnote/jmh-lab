@@ -1,6 +1,7 @@
 package com.xinchentechnote;
 
 import org.openjdk.jmh.annotations.*;
+
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
@@ -44,6 +45,7 @@ public class NewVsClonePrimitivesBenchmark {
     }
 
     private DataHolder prototype;
+    private int count = 100;
 
     @Setup
     public void setup() {
@@ -51,12 +53,16 @@ public class NewVsClonePrimitivesBenchmark {
     }
 
     @Benchmark
-    public DataHolder newInstance() {
-        return new DataHolder();
+    public void newInstance() {
+        for (int i = 0; i < count; i++) {
+            DataHolder dataHolder = new DataHolder();
+        }
     }
 
     @Benchmark
-    public DataHolder cloneInstance() {
-        return prototype.clone();
+    public void cloneInstance() {
+        for (int i = 0; i < count; i++) {
+            DataHolder clone = prototype.clone();
+        }
     }
 }

@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.xinchentechnote.NewVsClonePrimitivesBenchmark.cloneInstance","avgt",1,5,7.045442,4.243898,"ns/op"
+"com.xinchentechnote.NewVsClonePrimitivesBenchmark.newInstance","avgt",1,5,6.019859,0.965919,"ns/op"
