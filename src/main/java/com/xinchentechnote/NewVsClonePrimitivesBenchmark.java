@@ -45,6 +45,8 @@ public class NewVsClonePrimitivesBenchmark {
     }
 
     private DataHolder prototype;
+    public DataHolder dataHolder;
+    public DataHolder clone;
     private int count = 100;
 
     @Setup
@@ -55,14 +57,14 @@ public class NewVsClonePrimitivesBenchmark {
     @Benchmark
     public void newInstance() {
         for (int i = 0; i < count; i++) {
-            DataHolder dataHolder = new DataHolder();
+            dataHolder = new DataHolder();
         }
     }
 
     @Benchmark
     public void cloneInstance() {
         for (int i = 0; i < count; i++) {
-            DataHolder clone = prototype.clone();
+            clone = prototype.clone();
         }
     }
 }
