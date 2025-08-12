@@ -17,6 +17,49 @@
     <disruptor.version>3.4.4</disruptor.version>
   </properties>
   <dependencies>
+
+  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.19.2</version>
+</dependency>
+
+  <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.13.1</version>
+</dependency>
+
+   <!-- https://mvnrepository.com/artifact/com.dslplatform/dsl-json -->
+  <dependency>
+      <groupId>com.dslplatform</groupId>
+      <artifactId>dsl-json</artifactId>
+      <version>2.0.2</version>
+  </dependency>
+
+  <!-- https://mvnrepository.com/artifact/io.avaje/avaje-jsonb -->
+<dependency>
+    <groupId>io.avaje</groupId>
+    <artifactId>avaje-jsonb</artifactId>
+    <version>3.4</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>2.0.58</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.jsoniter/jsoniter -->
+<dependency>
+    <groupId>com.jsoniter</groupId>
+    <artifactId>jsoniter</artifactId>
+    <version>0.9.23</version>
+</dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
